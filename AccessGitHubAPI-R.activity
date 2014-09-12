@@ -43,3 +43,5 @@ Authentication complete.
 > req <- GET("https://api.github.com/users/jtleek/repos", gtoken)
 > stop_for_status(req)
 > content(req)
+> content(req)[[1]]$created_at
+[1] "2013-08-28T18:18:50Z"
