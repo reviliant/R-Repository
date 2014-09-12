@@ -1,0 +1,45 @@
+> library(httr)
+> oauth_endpoints("github")
+<oauth_endpoint>
+ authorize: https://github.com/login/oauth/authorize
+ access:    https://github.com/login/oauth/access_token
+> myapp <- oauth_app("github","c87d537080c5b4c6e616")
+Warning message:
+Couldn't find secret in environment variable GITHUB_CONSUMER_SECRET 
+> myapp <- oauth_app("github","c87d537080c5b4c6e616","aae85b4a7ebc97b46528cc8b08e5407f40caea99")
+> github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+Use a local file to cache OAuth access credentials between R sessions?
+1: Yes
+2: No
+
+Selection: 1
+Adding .httr-oauth to .gitignore
+Error in authorizer(authorize_url, is_interactive) : 
+  httpuv package required to capture OAuth credentials.
+> install.package("httpuv")
+Error: could not find function "install.package"
+> install.packages("httpuv")
+--- Please select a CRAN mirror for use in this session ---
+trying URL 'http://cran.rstudio.com/bin/windows/contrib/3.1/httpuv_1.3.0.zip'
+Content type 'application/zip' length 857663 bytes (837 Kb)
+opened URL
+downloaded 837 Kb
+
+package ‘httpuv’ successfully unpacked and MD5 sums checked
+
+The downloaded binary packages are in
+        C:\Users\thakurta\AppData\Local\Temp\RtmpIz84SB\downloaded_packages
+> github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+Waiting for authentication in browser...
+Press Esc/Ctrl + C to abort
+
+> 
+> 
+> github_token <- oauth2.0_token(oauth_endpoints("github"), myapp)
+Waiting for authentication in browser...
+Press Esc/Ctrl + C to abort
+Authentication complete.
+> gtoken <- config(token = github_token)
+> req <- GET("https://api.github.com/users/jtleek/repos", gtoken)
+> stop_for_status(req)
+> content(req)
