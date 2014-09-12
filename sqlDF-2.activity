@@ -1,0 +1,3 @@
+#what is the equivalent function to unique(acs$AGEP)
+
+answer <- sqldf("select distinct AGEP from acs")
